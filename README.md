@@ -11,6 +11,11 @@ The following repository contains several WSO2 docker images and template config
 * Shared user-store and registry MySQL database mounts
 * SVN based Dep-sync artifact synchronization
 
+## Clustered setup
+
+![Image](https://cloud.githubusercontent.com/assets/3282157/8763084/680a7b2a-2dab-11e5-9bc6-0637b926d8ca.png)
+
+
 ## How to create a ESB/AS docker cluster?
 
 * **Build required docker image**
