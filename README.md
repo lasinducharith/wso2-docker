@@ -17,6 +17,7 @@ The following repository contains several WSO2 docker images and template config
 
 * **Execute run.sh bash script inside required server**
 
+
 ## Repository directory structure
 
 ```
@@ -66,12 +67,12 @@ sh build.sh clean
 ```
 docker images
 ```
- 
+
 (6) Pull MySQL server and SVN-Server docker images (optional) - Even if you do not pull the images here, when we execute the run script, it will download the images from docker-hub
+
 ```
 docker pull sameersbn/mysql:latest
 docker pull krisdavison/svn-server:v2.0
-```
 ```
 
 (7) Navigate to wso2esb docker image directory (wso2-docker/docker/wso2esb-4.8.1) and execute run script.
@@ -80,6 +81,11 @@ sudo ./run.sh
 ```
 
 (8) If the cluster is created you will see an output similar to below
+```
+sudo ./run.sh
+```
+
+8. If the cluster is created you will see an output similar to below
 ```
 MySQL server started: [name] mysql-db-server [ip] 172.17.1.17 [container-id] 37ee1775dcae50eb765981a5785c196070ca2a853b622ffd23a36d5f931bb418
 Dep Sync SVN server started: [name] dep-sync-svn [ip] 172.17.1.18 [container-id] 14f287adff2beb84672a9017ff2dff2c2f383cf54ae1fabff1c28c96ec348b27
@@ -94,5 +100,8 @@ ssh root@172.17.1.19
 ```
 
 (10) To stop and delete the containers you can run stop.sh and delete.sh scripts in order.
+```
+ssh root@172.17.1.19
+```
 
 
