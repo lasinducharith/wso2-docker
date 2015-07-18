@@ -31,20 +31,6 @@ DB_MOUNT_DIR=/opt/mysql/data
 SLEEP_INTERVAL=10
 memberId=1
 
-validateImages(){
-# List of required docker images
-declare -a arr=("sameersbn/mysql" "krisdavison/svn-server" "lasinducharith/esb")
-
-for i in "${arr[@]}"
-do
-   IMAGE=$(docker images | grep "$i" |  awk '{print $3}')
-    if [[ -z $IMAGE ]]; then
-        echo "$i image not found... "
-        exit 1
-    fi
-done
-}
-
 startMySQLServer() {
 	rm -rf $DB_MOUNT_DIR
 	mkdir -p $DB_MOUNT_DIR
@@ -101,7 +87,6 @@ startMember() {
 
 echo "Starting ESB cluster with docker..."
 
-validateImages
 startMySQLServer
 startSVNServer
 startWkaMember
