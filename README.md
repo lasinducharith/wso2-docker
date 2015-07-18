@@ -1,19 +1,19 @@
-# WSO2 Docker Images for clustered setups
+# WSO2 Docker Images and clustered setups
 
-If you are in the need of creating a full fledged WSO2 cluster in docker, this is the ideal start for you. You can simply deploy a WSO2 ESB/AS worker manager clustered setup with database mounts and deployment syncronization in docker, within just a matter of few seconds using a single script.
+If you are in the need of creating a full fledged WSO2 cluster in docker, this is the ideal start for you. You can simply deploy a WSO2 ESB/AS worker manager clustered setup with database mounts and deployment synchronization in docker, within just a matter of few seconds using a single script.
 
 Most of the development is based on [WSO2 Private-PaaS](https://github.com/wso2/product-private-paas) repository and you can get the latest configurator distribution (ppaas-configurator-4.1.0-SNAPSHOT.zip) from there.
 
-The following repository contains several WSO2 docker images and template configuration files
+The artifacts contain several WSO2 docker images and template configuration files along with bash scripts to accomplish following.
 
 * Clustering with wka membership scheme
 * Separate MySQL-server container and svn-server container
 * Shared user-store and registry MySQL database mounts
-* SVN based Dep-sync artifact synchronization
+* SVN based artifact synchronization 
 
 ## Clustered setup
 
-![Image](https://cloud.githubusercontent.com/assets/3282157/8763084/680a7b2a-2dab-11e5-9bc6-0637b926d8ca.png)
+![Image](https://cloud.githubusercontent.com/assets/3282157/8763139/1362474a-2dad-11e5-942c-1ca9227a29c6.png)
 
 
 ## How to create a ESB/AS docker cluster?
@@ -50,47 +50,49 @@ The following repository contains several WSO2 docker images and template config
           
 ```
 ## Steps to get started
-(Below steps explains how to create a ESB cluster)
+##### (Below steps explains how to create a ESB cluster. Similar steps can be followed for AS as well)
 
-(1) Copy following files to the packages folder of base-image (wso2-docker/docker/base-image):
+If your host machine does not have docker installed, please follow the [docker documenation](https://docs.docker.com/installation/ubuntulinux/) in-order to get started. 
+
+* Copy following files to the packages folder of base-image (wso2-docker/docker/base-image):
 ```
 jdk-7u60-linux-x64.tar
 ppaas-configurator-4.1.0-SNAPSHOT.zip
 ```
 
-(2)  Run build.sh file to build the docker image:
+* Run build.sh file to build the docker image:
 ```
 sh build.sh
 ```
 
-(3) Navigate to wso2esb docker image directory (wso2-docker/docker/wso2esb-4.8.1) and copy the ESB distribution:
+* Navigate to wso2esb docker image directory (wso2-docker/docker/wso2esb-4.8.1) and copy the ESB distribution:
 ```
 wso2esb-4.8.1.zip
 ```
 
-(4) Run build.sh file with 'clean' param to build the docker image with template module:
+* Run build.sh file with 'clean' param to build the docker image with template module:
 ```
 sh build.sh clean
 ```
 
-(5) List docker images and see if **lasinducharith/base** and  **lasinducharith/esb** images are avaiable:
+* List docker images and see if **lasinducharith/base** and  **lasinducharith/esb** images are avaiable:
 ```
 docker images
 ```
 
-(6) Pull MySQL server and SVN-Server docker images (optional) - Even if you do not pull the images here, when we execute the run script, it will download the images from docker-hub
+* Pull MySQL server and SVN-Server docker images (optional) - Even if you do not pull the images here, when we execute the run script, it will download the images from docker-hub
 
 ```
 docker pull sameersbn/mysql:latest
 docker pull krisdavison/svn-server:v2.0
 ```
 
-(7) Navigate to wso2esb docker image directory (wso2-docker/docker/wso2esb-4.8.1) and execute run script.
+* Navigate to wso2esb docker image directory (wso2-docker/docker/wso2esb-4.8.1) and execute run script.
 ```
 sudo ./run.sh
 ```
 
-(8) If the cluster is created you will see an output similar to below
+* If the cluster is created, you will see an output similar to below
 ```
 MySQL server started: [name] mysql-db-server [ip] 172.17.1.17 [container-id] 37ee1775dcae50eb765981a5785c196070ca2a853b622ffd23a36d5f931bb418
 Dep Sync SVN server started: [name] dep-sync-svn [ip] 172.17.1.18 [container-id] 14f287adff2beb84672a9017ff2dff2c2f383cf54ae1fabff1c28c96ec348b27
@@ -99,15 +101,20 @@ ESB member started: [name] wso2esb-2 [ip] 172.17.1.20 [container-id] f42dab2d10d
 ESB member started: [name] wso2esb-3 [ip] 172.17.1.21 [container-id] 65a81d5ed987e3640dc57d547af05e9a3fed14f7d6a5fbe0173fe9bbe84aa1e8
 ```
 
-(9) You can ssh to ESB containers using following command. The default password will be 'wso2'.
+* Execute following docker command to see the details of running containers
+```
+docker ps
+```
+
+* You can ssh to ESB containers using following command. The default password will be 'wso2'.
 ```
 ssh root@172.17.1.19
 ```
 
-(10) To stop and delete the containers, you can run stop.sh and delete.sh scripts.
+* To stop and delete the containers, you can run stop.sh and delete.sh scripts.
 
 
-## How to apply patches/libs/ etc to the server
+## How to apply patches/libs etc. to the server
 
 * Navigate to wso2-docker/template-modules/wso2esb-4.8.1/files. You can copy what ever the required files there, before building the docker image.
 
