@@ -75,7 +75,7 @@ wso2esb-4.8.1.zip
 sh build.sh clean
 ```
 
-* List docker images and see if **lasinducharith/base** and  **lasinducharith/esb** images are avaiable:
+* List docker images and see if **lasinducharith/base-image** and  **lasinducharith/esb** images are avaiable:
 ```
 docker images
 ```
@@ -122,5 +122,7 @@ ssh root@172.17.1.19
 
 * Handle failover
 * Support Multiple WKA members
+* Front product clusters by NGINX container
+* Add support for other WSO2 products (APIM, IS, GREG, CEP etc.)
 
 
